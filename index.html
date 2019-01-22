@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">    
+</head>
+<body>
+    <button id="new_book">New Book</button>
+    <form action="noaction">
+        <fieldset class="book_info">
+            <label>
+                Author of the book
+                <input name="author" placeholder="Author" required>
+            </label>
+            <label for="title">
+                Book title
+                <input id="title" name="title" placeholder="Title" required>
+            </label>
+            <label for="numPages">
+                Number of pages
+                <input type="number" id="numPages" name="numPages" required>
+            </label>
+            <label for="state">
+                Read<br>
+                <input class="radio" type="radio" id="read" name="state" value="Yes">Yes
+                <input class="radio" type="radio" id="notRead" name="state" value="No" checked>No
+            </label>
+        </fieldset>
+
+        <fieldset class="action">
+            <input type="reset" class="reset" value="Clear">
+            <input type="submit" value="Add" class="submit">
+        </fieldset>
+    </form>
+  <script src="practica.js"></script>
+</body>
+</html>
