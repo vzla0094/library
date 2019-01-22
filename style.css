@@ -95,6 +95,10 @@ body div{
     padding: 20px;
 }
 
+body div button {
+    display: inline-block;    
+}
+
 button{
     display: block;
     margin: 0 auto;
