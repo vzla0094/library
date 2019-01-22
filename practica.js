@@ -18,31 +18,38 @@ function Book(author, title, numPages, state){
     this.Read = state;
 }
 
-Book.prototype.render = function(){
-    this.cardContainer = document.createElement('div');
-    this.cardContainer.setAttribute('data-title', `${this.Title}`);
-    this.DOMTitle = nodeMaker('p', this.cardContainer, `Title: ${this.Title}`);
-    this.DOMAuthor = nodeMaker('p', this.cardContainer, `Author: ${this.Author}`);
-    this.DOMPages = nodeMaker('p', this.cardContainer, `Number of pages: ${this.Pages}`);
-    this.DOMRead = nodeMaker('p', this.cardContainer, `Read: ${this.Read}`);
-    nodeMaker('button', this.cardContainer, 'Delete')
-        .setAttribute('data-action', 'delete');
-    nodeMaker('button', this.cardContainer, 'Change read status')
-        .setAttribute('data-action', 'state');
-    this.cardContainer.querySelector('button[data-action="delete"]')
-        .addEventListener('click', wipe);
-    this.cardContainer.querySelector('button[data-action="state"]')
-        .addEventListener('click', callChangeState);
-    document.body.appendChild(this.cardContainer);
-}
-
-Book.prototype.changeState = function(){
-    if(this.Read === 'Yes'){
-        this.Read = 'No';
-    }else{
-        this.Read = 'Yes';
+Book.prototype = {
+    constructor: Book,
+    render(){
+        this.cardContainer = document.createElement('div');
+        this.cardContainer.setAttribute('data-title', `${this.Title}`);
+        this.DOMTitle = nodeMaker('p', this.cardContainer, `Title: ${this.Title}`);
+        this.DOMAuthor = nodeMaker('p', this.cardContainer, `Author: ${this.Author}`);
+        this.DOMPages = nodeMaker('p', this.cardContainer, `Number of pages: ${this.Pages}`);
+        this.DOMRead = nodeMaker('p', this.cardContainer, `Read: ${this.Read}`);
+        nodeMaker('button', this.cardContainer, 'Delete')
+            .setAttribute('data-action', 'delete');
+    
+        nodeMaker('button', this.cardContainer, 'Change read status')
+            .setAttribute('data-action', 'state');
+    
+        this.cardContainer.querySelector('button[data-action="delete"]')
+            .addEventListener('click', wipe);
+    
+        this.cardContainer.querySelector('button[data-action="state"]')
+            .addEventListener('click', callChangeState);
+    
+        document.body.appendChild(this.cardContainer);
+    },
+    changeState (){
+        if(this.Read === 'Yes'){
+            this.Read = 'No';
+        }else{
+            this.Read = 'Yes';
+        }
+        this.DOMRead.textContent = `Read: ${this.Read}`;
     }
-    this.DOMRead.textContent = `Read: ${this.Read}`;
+
 }
 
 function makeBook(event){
