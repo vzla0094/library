@@ -25,9 +25,10 @@ Book.prototype.render = function(){
         }
     }
     nodeMaker('button', cardContainer, 'Delete');
+    cardContainer.querySelector('button').addEventListener('click', wipe);
+    cardContainer.setAttribute('data-index', `${myLibrary.indexOf(this)}`);
     document.body.appendChild(cardContainer);
 }
-
 
 function makeBook(event){
     event.preventDefault();
@@ -38,4 +39,9 @@ function makeBook(event){
     myLibrary.push(new Book(author, title, numPages, state));
     form.classList.remove('displayForm');
     myLibrary[myLibrary.length-1].render();
+}
+
+function wipe (){
+    myLibrary.splice(parseInt(this.parentNode.getAttribute('data-index')), 1);
+    this.parentNode.remove();
 }
