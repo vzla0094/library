@@ -1,9 +1,10 @@
 let myLibrary = [];
-let form = document.querySelector("form");
 let button = document.getElementById('new_book');
 button.addEventListener('click', () => form.classList.add('displayForm'));
+let form = document.querySelector("form");
+form.addEventListener('submit', makeBook);
 
-function nodeMaker(nodeType, text, parent){
+function nodeMaker(nodeType, parent, text){
     let newNode = document.createElement(nodeType);
     if (!undefined) newNode.textContent = text;
     parent.appendChild(newNode);
@@ -20,26 +21,21 @@ Book.prototype.render = function(){
     let cardContainer = document.createElement('div');
     for (let key in this){
         if(this.hasOwnProperty(key)){
-            nodeMaker('p', `${key}: ${this[key]}`, cardContainer);        
+            nodeMaker('p', cardContainer, `${key}: ${this[key]}`);        
         }
     }
-
-    return cardContainer;
+    nodeMaker('button', cardContainer, 'Delete');
+    document.body.appendChild(cardContainer);
 }
 
-// Book.prototype.delete = function (){
-//     myLibrary.
-// }
 
-form.addEventListener('submit', e => {
-    e.preventDefault();
+function makeBook(event){
+    event.preventDefault();
     const author = form.elements.author.value;
     const title = form.elements.title.value;
     const numPages = form.elements.numPages.value;
     const state = form.elements.state.value;
     myLibrary.push(new Book(author, title, numPages, state));
     form.classList.remove('displayForm');
-    (function display() {
-        document.body.appendChild(myLibrary[myLibrary.length-1].render())
-    })();
-})
+    myLibrary[myLibrary.length-1].render();
+}
